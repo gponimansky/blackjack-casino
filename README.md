@@ -6,3 +6,5 @@ Blackjack with the rules of play at casinos.
 >Resplit is allowed.  
 >Altered payout for a winning blackjack.  
 >Late/early surrender allowed.  
+
+Uses system beeps for cool sound effects.
