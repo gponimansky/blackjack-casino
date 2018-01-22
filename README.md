@@ -1,4 +1,4 @@
-# blackjack-casino
+# Blackjack Casino
 Blackjack with the rules of play at casinos.  
   
 >House stands on soft 17.  
