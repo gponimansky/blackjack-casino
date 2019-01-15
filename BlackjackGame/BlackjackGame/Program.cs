@@ -5,20 +5,19 @@ using System.Text;
 
 namespace BlackjackGame
 {
-    class Program
+    static class Program
     {
 
         static void Main(string[] args)
         {
             // Declaring Array
-            string[] deck = new string[] { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+            string[] deck = new [] { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
             // Declaring Important Variables
             double money = 200;
             double moneyBet = 0;
 
             bool isPlaying = false;
             bool quit = false;
-
 
             // Writes a Welcome To Game Message while playing a cool song
             Console.WriteLine("\n\n\tThe");
@@ -167,7 +166,7 @@ namespace BlackjackGame
             {
                 // Subtracts Total Money by MoneyBet
                 moneyHave = moneyHave - moneyBet;
-                if (moneyBet == 0)
+                if ((int)moneyBet == 0)
                 {
                     // Goodbye Message
                     Console.WriteLine("\nThanks For Playing...");
@@ -299,7 +298,7 @@ namespace BlackjackGame
             // Dealer's Open Card
             Console.WriteLine("\nDealer's Cards are a " + dealerCards[0] + " and * ");
             // If Dealer's Open Card is a Ace allow Insurance
-            if (dealerCards[0] == "A") insurance = true;
+            if (dealerCards[0] == "A") { insurance = true; }
             // Allow Player to make a Insurance Side Bet if avaliable
             while(insurance)
             {
@@ -371,7 +370,7 @@ namespace BlackjackGame
                                 }
 
                             }
-                            else if (moneyInsured == 0)
+                            else if ((int)moneyInsured == 0)
                             {
                                 Console.WriteLine("\nYou Didnt Insure Anything. . .");
                                 // Waits For The User to Countinue 
@@ -426,19 +425,19 @@ namespace BlackjackGame
                 isPlayingGame = false;
             }
             // If Player Has Two of the Same Card Types, Allow Split
-            if (playerCards[0] == playerCards[1] || playerCards[1] == "A - One" && playerCards[0] == "A") splitavailable = true;
+            if (playerCards[0] == playerCards[1] || playerCards[1] == "A - One" && playerCards[0] == "A") { splitavailable = true; }
             // Turns On Game Loop
             while (isPlayingGame)
             {
                 if (playersTurn)
                 {
                     // Shows How much Player has, if splitting shows current deck
-                    if (!spliting) Console.WriteLine("\nThe Value Of Your Cards is " + playerValueOfCards);
-                    else Console.WriteLine("\nThe Value Of Your Cards in the Other Hand is " + playerSplitValueOfCards);
+                    if (!spliting) { Console.WriteLine("\nThe Value Of Your Cards is " + playerValueOfCards); }
+                    else { Console.WriteLine("\nThe Value Of Your Cards in the Other Hand is " + playerSplitValueOfCards); }
                     // Askes Player if He Would Like to Hit or Stand
                     Console.WriteLine("\nWhat Would You Like To Do?\n1.Hit\n2.Stand");
-                    if (firstTurn && splitavailable) Console.WriteLine("3.DoubleDown\n4.Surrender\n5.Split");
-                    else if (firstTurn) Console.WriteLine("3.DoubleDown\n4.Surrender");
+                    if (firstTurn && splitavailable) { Console.WriteLine("3.DoubleDown\n4.Surrender\n5.Split"); }
+                    else if (firstTurn) { Console.WriteLine("3.DoubleDown\n4.Surrender"); }
                     choice = Console.ReadLine();
                     if (spliting)
                     {
@@ -496,8 +495,7 @@ namespace BlackjackGame
                                         // change other hand's deck starting value to 0
                                         i = 0;
                                     }
-                                }
-                                
+                                }                              
                                 // Waits For The User to Countinue 
                                 Console.ReadKey();
                                 // Clears Screen 
@@ -529,6 +527,10 @@ namespace BlackjackGame
                                 Console.ReadKey();
                                 // Clears Screen 
                                 Console.Clear();
+                                break;
+                            //  Making sure an fluxus doesn't occur
+                            default:
+                                // Empty
                                 break;
                         }
                 }
@@ -621,6 +623,10 @@ namespace BlackjackGame
                             Console.ReadKey();
                             // Clears Screen 
                             Console.Clear();
+                            break;
+                        //  Making sure an fluxus doesn't occur
+                        default:
+                            // Empty
                             break;
                     }
                 }
@@ -772,7 +778,10 @@ namespace BlackjackGame
                             firstTurn = false;
                             splitavailable = false;
                         }
-                        else errorSave = false;
+                        else 
+                        {
+                            errorSave = false;
+                        }
                     }
                 }
                 else
@@ -1018,11 +1027,7 @@ namespace BlackjackGame
             while (!isDoneChecking)
             {
                 index++;
-                if (theDeck[index] == "A")
-                {
-                    isDoneChecking = true;
-                }
-                else if (index == theDeck.Length - 1)
+                if (theDeck[index] == "A" || index == theDeck.Length - 1)
                 {
                     isDoneChecking = true;
                 }
@@ -1040,21 +1045,15 @@ namespace BlackjackGame
         /// <returns>Returns Int Value of the Card in the Deck</returns>
         static private int convertToInt(string[] deck, int index)
         {
-            int returnValue = 0;
+            int returnValue;
             switch (deck[index])
             {
                 case "A":
                     returnValue = 11;
                     break;
                 case "K":
-                    returnValue = 10;
-                    break;
                 case "Q":
-                    returnValue = 10;
-                    break;
                 case "J":
-                    returnValue = 10;
-                    break;
                 case "10":
                     returnValue = 10;
                     break;
@@ -1081,6 +1080,9 @@ namespace BlackjackGame
                     break;
                 case "2":
                     returnValue = 2;
+                    break;
+                default:
+                    returnValue = 0;
                     break;
             }
             return returnValue;
